@@ -1,3 +1,5 @@
 <script setup></script>
 
-<template>No Data yet.</template>
+<template>
+  <div class="container mx-auto">Test</div>
+</template>

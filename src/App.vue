@@ -24,7 +24,7 @@ export default defineComponent({
     GameScreen,
   },
 
-  setup(props, {}) {
+  setup(props) {
     const isStarted = ref(false);
 
     const onStart = () => {

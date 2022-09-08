@@ -1,6 +1,6 @@
 <template>
   <div class="GameScreenBody flex items-center justify-center">
-    <JackpotTable />
+    <JackpotTable @done="onDone" :rolling="rolling" />
   </div>
 </template>
 
@@ -10,10 +10,28 @@ import JackpotTable from "./JackpotTable.vue";
 
 export default defineComponent({
   name: "GameScreenBody",
-  props: {},
-  setup(props, {}) {
-    return {};
-  },
+
   components: { JackpotTable },
+
+  props: {
+    rolling: {
+      type: Boolean,
+      required: true,
+    },
+  },
+
+  emits: {
+    "rolling-done": (v) => true,
+  },
+
+  setup(props, { emit }) {
+    const onDone = () => {
+      emit("rolling-done", true);
+    };
+
+    return {
+      onDone,
+    };
+  },
 });
 </script>

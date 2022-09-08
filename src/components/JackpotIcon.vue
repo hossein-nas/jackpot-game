@@ -1,11 +1,11 @@
 <template>
   <div class="JackpotIcon">
-    <transition name="move-up" mode="out-in">
+    <transition name="move-up" duration="300" mode="out-in">
       <JackpotLoading v-if="localLoading" :loading="localLoading" />
       <component
         :is="'jackpot-' + activeIcon"
         class="w-[5rem] h-[5rem]"
-        v-else-if="isVisible"
+        v-else
       />
     </transition>
   </div>
@@ -55,6 +55,7 @@ export default defineComponent({
   setup(props, { emit }) {
     const isVisible = ref(false);
     const localLoading = ref(true);
+
     const IconMapper = {
       c: "cherry",
       w: "watermelon",
@@ -75,11 +76,18 @@ export default defineComponent({
       }, props.delay);
     };
 
+    const onShouldReset = () => {
+      localLoading.value = true;
+      isVisible.value = false;
+    };
+
     watch(
       () => props.loading,
       (value) => {
         if (value === false) {
           onShouldAppear();
+        } else {
+          onShouldReset();
         }
       },
       {

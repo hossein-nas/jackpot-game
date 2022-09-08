@@ -2,7 +2,7 @@
   <div class="GameScreen h-full w-full">
     <GameScreenHeader @re-roll="onReRoll" :rolling="rolling" />
     <GameScreenBody :rolling="rolling" @rolling-done="onRollingDone" />
-    <GameScreenFooter />
+    <GameScreenFooter v-if="!rolling" />
   </div>
 </template>
 

@@ -2,9 +2,9 @@ import { computed, ref } from "vue";
 
 const credit = ref(10);
 
-const isRolling = ref(false);
-
 const rollResult = ref();
+
+const isCashOutButtonWorking = ref(true);
 
 const IconMapper = {
   c: "cherry",
@@ -27,9 +27,12 @@ export default function () {
     credit: computed(() => credit.value),
     rollResult: computed(() => rollResult.value),
     canReRoll: computed(() => credit.value > 0),
+    isCashOutButtonWorking: computed(() => isCashOutButtonWorking.value),
     IconMapper,
     reRoll,
     done,
+    checkCashOutButtonCondition,
+    doesCashOutButtonGotCrazy,
   };
 }
 
@@ -48,7 +51,6 @@ function roll(twistPercentage = 0) {
 }
 
 function rollWithCheat(twistPercentage, prevRoll) {
-  debugger;
   const rand = Math.random();
 
   if (rand > twistPercentage / 100) return prevRoll;
@@ -99,9 +101,19 @@ function decreaseCredit(resultArr) {
 
 function done() {
   if (allIsSame(rollResult.value)) {
-    debugger;
     increaseCredit(rollResult.value);
   } else {
     decreaseCredit();
   }
+}
+
+function checkCashOutButtonCondition() {
+  isCashOutButtonWorking.value = Math.random() > 0.4;
+}
+
+function doesCashOutButtonGotCrazy() {
+  if (Math.random() > 0.5) {
+    return true; // should work
+  }
+  return false; // should not work
 }

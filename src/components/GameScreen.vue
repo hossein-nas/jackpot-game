@@ -8,22 +8,31 @@
 
 <script>
 import { defineComponent, ref } from "vue";
-import GameScreenHeader from "./GameScreenHeader.vue";
+import useJackpot from "./composables/useJackpot";
 import GameScreenBody from "./GameScreenBody.vue";
 import GameScreenFooter from "./GameScreenFooter.vue";
+import GameScreenHeader from "./GameScreenHeader.vue";
 
 export default defineComponent({
   name: "GameScreen",
   props: {},
   setup(props, {}) {
+    const { reRoll, canReRoll, done } = useJackpot();
+
     const rolling = ref(true);
 
     const onRollingDone = () => {
       rolling.value = false;
+      done();
     };
 
     const onReRoll = () => {
-      rolling.value = true;
+      if (canReRoll.value) {
+        reRoll();
+        rolling.value = true;
+      } else {
+        alert("Sorry, You can not start game. your credit is over.");
+      }
     };
 
     return {

@@ -12,7 +12,15 @@
 </template>
 
 <script>
-import { computed, defineComponent, ref, Transition, watch } from "vue";
+import {
+  computed,
+  defineComponent,
+  onMounted,
+  ref,
+  Transition,
+  watch,
+} from "vue";
+import useJackpot from "./composables/useJackpot";
 import JackpotCherry from "./JackpotCherry.vue";
 import JackpotLemon from "./JackpotLemon.vue";
 import JackpotLoading from "./JackpotLoading.vue";
@@ -53,19 +61,15 @@ export default defineComponent({
   },
 
   setup(props, { emit }) {
+    const { IconMapper } = useJackpot();
     const isVisible = ref(false);
     const localLoading = ref(true);
-
-    const IconMapper = {
-      c: "cherry",
-      w: "watermelon",
-      o: "orange",
-      l: "lemon",
-    };
 
     const activeIcon = computed(() => {
       return IconMapper[props.icon];
     });
+
+    onMounted(() => {});
 
     const onShouldAppear = () => {
       setTimeout(() => {

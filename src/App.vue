@@ -11,8 +11,9 @@
 
 <script>
 import { defineComponent, ref } from "vue";
-import StartScreen from "./components/StartScreen.vue";
+import useJackpot from "./components/composables/useJackpot";
 import GameScreen from "./components/GameScreen.vue";
+import StartScreen from "./components/StartScreen.vue";
 
 export default defineComponent({
   name: "App",
@@ -25,9 +26,12 @@ export default defineComponent({
   },
 
   setup(props) {
+    const { reRoll, canReRoll } = useJackpot();
+
     const isStarted = ref(false);
 
     const onStart = () => {
+      reRoll();
       isStarted.value = true;
     };
 

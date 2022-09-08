@@ -38,12 +38,15 @@
         <span v-else> Start Again </span>
       </button>
     </div>
-  <div class="GameScreenHeader flex items-center justify-center">Header</div>
+    <p class="text-center">
+      Your credit is : <b>{{ credit }} </b>
+    </p>
   </div>
 </template>
 
 <script>
 import { defineComponent } from "vue";
+import useJackpot from "./composables/useJackpot";
 
 export default defineComponent({
   name: "GameScreenHeader",
@@ -60,14 +63,14 @@ export default defineComponent({
   },
 
   setup(props, { emit }) {
-    const { credit } = useJackpot();
+    const { credit, rollResult } = useJackpot();
     const onClick = () => {
       emit("re-roll", true);
     };
 
     return {
-  setup(props, {}) {
-    return {};
+      credit,
+      rollResult,
       onClick,
     };
   },

@@ -3,14 +3,14 @@
     <tbody>
       <tr>
         <td class="border border-gray-200 p-4">
-          <JackpotIcon icon="c" delay="1000" :loading="loading" />
+          <JackpotIcon :icon="rollResult[0]" delay="1000" :loading="loading" />
         </td>
         <td class="border border-gray-200 p-4">
-          <JackpotIcon icon="w" delay="2000" :loading="loading" />
+          <JackpotIcon :icon="rollResult[1]" delay="2000" :loading="loading" />
         </td>
         <td class="border border-gray-200 p-4">
           <JackpotIcon
-            icon="l"
+            :icon="rollResult[2]"
             delay="3000"
             :loading="loading"
             @revealed="onDone"
@@ -23,6 +23,7 @@
 
 <script>
 import { defineComponent, watch, ref } from "vue";
+import useJackpot from "./composables/useJackpot";
 import JackpotIcon from "./JackpotIcon.vue";
 
 export default defineComponent({
@@ -40,6 +41,7 @@ export default defineComponent({
   },
 
   setup(props, { emit }) {
+    const { rollResult } = useJackpot();
     const loading = ref(true);
 
     const onDone = () => {
@@ -61,6 +63,7 @@ export default defineComponent({
 
     return {
       loading,
+      rollResult,
       onDone,
     };
   },

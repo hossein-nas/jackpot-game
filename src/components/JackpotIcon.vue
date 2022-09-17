@@ -62,7 +62,6 @@ export default defineComponent({
 
   setup(props, { emit }) {
     const { IconMapper } = useJackpot();
-    const isVisible = ref(false);
     const localLoading = ref(true);
 
     const activeIcon = computed(() => {
@@ -74,7 +73,6 @@ export default defineComponent({
     const onShouldAppear = () => {
       setTimeout(() => {
         localLoading.value = false;
-        isVisible.value = true;
 
         emit("revealed", true);
       }, props.delay);
@@ -82,7 +80,6 @@ export default defineComponent({
 
     const onShouldReset = () => {
       localLoading.value = true;
-      isVisible.value = false;
     };
 
     watch(
@@ -100,7 +97,6 @@ export default defineComponent({
     );
 
     return {
-      isVisible,
       localLoading,
       activeIcon,
     };

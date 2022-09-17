@@ -22,7 +22,7 @@
 </template>
 
 <script>
-import { defineComponent, watch, ref } from "vue";
+import { defineComponent, watch, ref, nextTick } from "vue";
 import useJackpot from "./composables/useJackpot";
 import JackpotIcon from "./JackpotIcon.vue";
 
@@ -55,7 +55,9 @@ export default defineComponent({
       (value) => {
         if (value) {
           loading.value = true;
-          setTimeout(() => (loading.value = false), 500);
+          setTimeout(() => {
+            loading.value = false;
+          }, 0);
         }
       },
       {

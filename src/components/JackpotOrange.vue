@@ -1,3 +1,3 @@
 <template>
-  <img src="@/assets/images/orange.png" alt="cherry" class="" />
+  <img src="@/assets/images/orange.png" alt="orange" class="" />
 </template>

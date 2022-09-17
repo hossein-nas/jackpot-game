@@ -1,5 +1,5 @@
 import { shallowMount } from "@vue/test-utils";
-import { describe, expect, it, test, vi } from "vitest";
+import { afterEach, describe, expect, it, test, vi } from "vitest";
 
 import useJackpot from "@/components/composables/useJackpot";
 import GameScreen from "@/components/GameScreen.vue";

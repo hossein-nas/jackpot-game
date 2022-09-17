@@ -1,3 +1,4 @@
+/* eslint-disable no-global-assign */
 import { mount, shallowMount } from "@vue/test-utils";
 import { afterEach, describe, expect, it, test, vi } from "vitest";
 import useJackpot from "@/components/composables/useJackpot";

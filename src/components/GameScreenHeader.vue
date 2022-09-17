@@ -3,6 +3,7 @@
     <div class="GameScreenHeader flex items-center justify-center">
       <button
         type="button"
+        vitest-re-roll-button
         @click="onClick"
         :disabled="rolling"
         :class="[
@@ -38,7 +39,7 @@
         <span v-else> Start Again </span>
       </button>
     </div>
-    <p class="text-center">
+    <p class="text-center" vitest-remaining-credit-text>
       Your credit is : <b>{{ credit }} </b>
     </p>
   </div>

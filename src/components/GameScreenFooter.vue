@@ -3,6 +3,7 @@
     <button
       ref="button"
       v-if="credit > 0"
+      vitest-cashout-button
       type="button"
       @mouseenter="onMouseEnter"
       @click="onClick"
@@ -42,7 +43,7 @@ export default defineComponent({
     checkCashOutButtonCondition();
 
     const onClick = () => {
-      if (isCashOutButtonWorking.value) {
+      if (!isCashOutButtonWorking.value) {
         alert("CASHOUT button is not working ...");
         return;
       }
@@ -53,7 +54,6 @@ export default defineComponent({
     const onMouseEnter = () => {
       if (doesCashOutButtonGotCrazy()) {
         const direction = DIRECTION[Math.floor(Math.random() * 4)];
-
         if (direction === "right") {
           button.value.style = "transform: translateX(300px)";
         } else if (direction === "bottom") {

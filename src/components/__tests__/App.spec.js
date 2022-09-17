@@ -3,21 +3,18 @@ import useJackpot from "@/components/composables/useJackpot";
 import GameScreen from "@/components/GameScreen.vue";
 import StartScreen from "@/components/StartScreen.vue";
 import { mount } from "@vue/test-utils";
-import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
+import { createHead } from "@vueuse/head";
+import { describe, expect, it, vi } from "vitest";
 
 describe("App.vue", () => {
-  beforeEach(() => {});
-
-  afterEach(() => {});
-
   it("should render StartGame at first glance", () => {
-    const wrapper = mount(App);
+    const wrapper = createWrapper();
 
     expect(wrapper.findComponent(StartScreen).exists()).toBe(true);
   });
 
   it("should move to GameScreen after clicking start button", async () => {
-    const wrapper = mount(App);
+    const wrapper = createWrapper();
 
     await wrapper.findComponent(StartScreen).find("button").trigger("click");
 
@@ -25,7 +22,7 @@ describe("App.vue", () => {
   });
 
   it("should have 10 credit on start", async () => {
-    const wrapper = mount(App);
+    const wrapper = createWrapper();
     const { credit } = useJackpot();
 
     expect(credit.value).toBe(10);
@@ -36,7 +33,7 @@ describe("App.vue", () => {
       toFake: ["setTimeout"],
     });
 
-    const wrapper = mount(App);
+    const wrapper = createWrapper();
     const { credit } = useJackpot();
 
     expect(credit.value).toBe(10);
@@ -55,3 +52,11 @@ describe("App.vue", () => {
     vi.useRealTimers();
   });
 });
+
+function createWrapper() {
+  return mount(App, {
+    global: {
+      plugins: [createHead()],
+    },
+  });
+}

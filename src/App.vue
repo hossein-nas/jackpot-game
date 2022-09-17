@@ -14,6 +14,7 @@ import { defineComponent, ref } from "vue";
 import useJackpot from "./components/composables/useJackpot";
 import GameScreen from "./components/GameScreen.vue";
 import StartScreen from "./components/StartScreen.vue";
+import { useHead } from "@vueuse/head";
 
 export default defineComponent({
   name: "App",
@@ -26,6 +27,9 @@ export default defineComponent({
   },
 
   setup(props) {
+    useHead({
+      title: "Jackpot Game",
+    });
     const { reRoll, canReRoll } = useJackpot();
 
     const isStarted = ref(false);

@@ -5,7 +5,7 @@ import vue from "@vitejs/plugin-vue";
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  base: "jackpot-game",
+  base: process.env.NODE_ENV === "production" ? "jackpot-game" : "",
   plugins: [vue()],
   resolve: {
     alias: {
